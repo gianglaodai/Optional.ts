@@ -70,6 +70,6 @@
   },
   "exclude": ["node_modules"],
   "files": [
-    "./src/optional.ts"
+    "./src/index.ts"
   ]
 }
