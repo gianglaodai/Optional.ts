@@ -1,18 +1,6 @@
 export abstract class Optional<T> {
   public static of<T>(value: T): Optional<T> {
-    if (value == null) {
-      throw new Error(
-        "Cannot create Optional.of null/undefined! Try Optional.ofNullable instead."
-      );
-    }
-    return new Some(value);
-  }
-
-  public static ofNullable<T>(value: T): Optional<T> {
-    if (value == null) {
-      return None.INSTANCE;
-    }
-    return new Some(value);
+    return value == null ? None.INSTANCE : new Some(value);
   }
 
   public static empty<T>(): Optional<T> {
@@ -115,7 +103,7 @@ class Some<T> extends Optional<T> {
     return this;
   }
   public map<R>(mapper: (t: T) => R): Optional<R> {
-    return Optional.ofNullable(mapper(this.value));
+    return Optional.of(mapper(this.value));
   }
   public flatMap<R>(mapper: (t: T) => Optional<R>): Optional<R> {
     const result = mapper(this.value);
